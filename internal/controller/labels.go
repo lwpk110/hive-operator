@@ -1,8 +1,15 @@
 package controller
 
 import (
-	hivev1alpha1 "github.com/zncdatadev/hive-operator/api/v1alpha1"
 	"strings"
+
+	hivev1alpha1 "github.com/zncdatadev/hive-operator/api/v1alpha1"
+)
+
+const (
+	LabelCrName    = "app.kubernetes.io/name"
+	LabelComponent = "app.kubernetes.io/component"
+	LabelManagedBy = "app.kubernetes.io/managed-by"
 )
 
 type RoleLabels struct {
@@ -12,8 +19,8 @@ type RoleLabels struct {
 
 func (r *RoleLabels) GetLabels() map[string]string {
 	return map[string]string{
-		"app.kubernetes.io/name":       strings.ToLower(r.cr.Name),
-		"app.kubernetes.io/component":  r.name,
-		"app.kubernetes.io/managed-by": "hive-operator",
+		LabelCrName:    strings.ToLower(r.cr.Name),
+		LabelComponent: r.name,
+		LabelManagedBy: "hive-operator",
 	}
 }
